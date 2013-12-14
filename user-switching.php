@@ -299,9 +299,12 @@ class user_switching {
 
 		if ( !is_admin_bar_showing() and $old_user = self::get_old_user() ) {
 			$link = sprintf( __( 'Switch back to %1$s (%2$s)', 'user-switching' ), $old_user->display_name, $old_user->user_login );
+   			// start of garvs edit
+   			$redirect_url = apply_filters('user_switching_back_redirect_url', self::current_url());
 			$url = add_query_arg( array(
-				'redirect_to' => urlencode( self::current_url() )
-			), self::switch_back_url() );
+				'redirect_to' => urlencode( $redirect_url )
+				), self::switch_back_url() );
+   			// end of garvs edit
 			echo '<p id="user_switching_switch_on"><a href="' . $url . '">' . $link . '</a></p>';
 		}
 
